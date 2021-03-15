@@ -1,3 +1,4 @@
+const colors = require('colors');
 const fs = require('fs');
 const { logica } = require('./logica')
 
@@ -9,7 +10,11 @@ const multiplicar = (base) => {
     const resultado = logica(base);
 
     console.log(resultado);
-    fs.writeFileSync(`tablas/tabla-del-${base}`, resultado);
+    const nombreArchivo = `tabla-del-${base}.txt`
+    fs.writeFile(`tablas/${nombreArchivo}`, resultado, (err) => {
+        if (err) throw err;
+        console.log(`El archivo ${nombreArchivo} fue creado!`.rainbow);
+    });
 }
 
 module.exports = {
